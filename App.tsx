@@ -1,26 +1,10 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import ChatWidget from './components/ChatWidget';
+import Page from './app/page';
 
+// This file is deprecated in favor of app/page.tsx and app/layout.tsx
+// It is kept here only for backward compatibility if needed.
 function App() {
-  return (
-    <div className="bg-black min-h-screen text-white font-sans selection:bg-brand-primary selection:text-black">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Contact />
-      </main>
-      <Footer />
-      <ChatWidget />
-    </div>
-  );
+  return <Page />;
 }
 
 export default App;
