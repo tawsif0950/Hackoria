@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
         </h1>
 
         <p className="mt-4 text-xl text-gray-400 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
-          <span className="font-bold text-white">HACKORIA</span> delivers elite web development and military-grade cyber security solutions. 
+          <span className="font-bold text-white">HACKORIA</span> delivers elite web development and military grade cyber security solutions. 
           Protect your assets while building the future.
         </p>
 
