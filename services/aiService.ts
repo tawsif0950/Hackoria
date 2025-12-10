@@ -1,49 +1,71 @@
 'use server';
 
-import { Message } from '../types';
-import { GoogleGenAI } from "@google/genai";
+const BOT_TOKEN = '8162964724:AAGFqoLbr-g43IynIwQe6ll5CsCoYchMGlY';
+const ADMIN_CHAT_ID = '7110225250';
 
-// The API key is obtained from the environment variable process.env.API_KEY.
-// By using 'use server', this code runs on the server side (Edge/Node) where the key is available.
+export async function sendMessageToAgent(text: string): Promise<boolean> {
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+  const timestamp = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+  const messageText = `🔔 *New Web Chat Message*\n\n"${text}"\n\n🕒 Time: ${timestamp}`;
 
-const SYSTEM_PROMPT = `
-You are HACKORIA AI, the intelligent assistant for HACKORIA, a premier Web Development and Cyber Security company.
-The Founder and CEO of HACKORIA is Abdur Rahman.
-Your tone is professional, technical, secure, and helpful.
-Services offered include: Advanced Web Development, Cyber Security Audits, Penetration Testing, Secure Cloud Solutions, and Custom Software Development.
-Answer inquiries briefly and professionally. Encourage users to contact via WhatsApp for quotes.
-`;
-
-export const sendMessageToAI = async (history: Message[]): Promise<string> => {
   try {
-    const apiKey = process.env.API_KEY?.trim();
-    if (!apiKey) {
-      console.error("CRITICAL ERROR: API_KEY is missing in environment variables.");
-      console.error("Please go to Vercel Dashboard > Settings > Environment Variables and add API_KEY.");
-      return "Security Alert: System configuration incomplete. Unable to process request.";
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: ADMIN_CHAT_ID,
+        text: messageText,
+        parse_mode: 'Markdown'
+      })
+    });
+    return response.ok;
+  } catch (error) {
+    console.error('Telegram Send Error:', error);
+    return false;
+  }
+}
+
+export async function checkAgentReplies(offset: number) {
+  // getUpdates with offset to only get new messages. 
+  // Cache: 'no-store' is crucial for Next.js to actually fetch fresh data.
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${offset}&timeout=0`;
+  
+  try {
+    const response = await fetch(url, { cache: 'no-store' });
+    const data = await response.json();
+    
+    if (!data.ok || !data.result) {
+      return { messages: [], nextOffset: offset };
     }
 
-    const ai = new GoogleGenAI({ apiKey });
+    const updates = data.result;
+    const agentMessages: { text: string; timestamp: string }[] = [];
+    let maxUpdateId = offset - 1;
 
-    // Map the message history to Gemini content format.
-    const contents = history
-      .filter(msg => msg.role !== 'system')
-      .map(msg => ({
-        role: msg.role === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.content }]
-      }));
+    for (const update of updates) {
+      // Track the highest update_id to confirm receipt
+      maxUpdateId = Math.max(maxUpdateId, update.update_id);
+      
+      // Check if message is from the admin (You)
+      if (update.message && update.message.from && update.message.from.id.toString() === ADMIN_CHAT_ID) {
+        // Format timestamp from unix
+        const date = new Date(update.message.date * 1000);
+        const timeStr = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+        
+        if (update.message.text) {
+          agentMessages.push({
+            text: update.message.text,
+            timestamp: timeStr
+          });
+        }
+      }
+    }
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: contents,
-      config: {
-        systemInstruction: SYSTEM_PROMPT,
-      },
-    });
-
-    return response.text || "I apologize, but I couldn't process that request securely at the moment.";
+    // Return messages and the next offset (max + 1) to mark these as read in Telegram
+    return { messages: agentMessages, nextOffset: maxUpdateId + 1 };
+    
   } catch (error) {
-    console.error("AI Service Error:", error);
-    return "Connection interrupted. Secure link failed. Please try again later.";
+    console.error('Telegram Poll Error:', error);
+    return { messages: [], nextOffset: offset };
   }
-};
+}
