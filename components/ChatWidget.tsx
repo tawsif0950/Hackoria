@@ -26,7 +26,7 @@ const ChatWidget: React.FC = () => {
         { 
           role: 'assistant', 
           content: 'Hello! You are connected with a live HACKORIA agent. How can we help you securely today?',
-          timestamp: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+          timestamp: new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true })
         }
       ]);
     }
@@ -59,7 +59,8 @@ const ChatWidget: React.FC = () => {
         const newMessages: Message[] = result.messages.map(msg => ({
           role: 'assistant',
           content: msg.text,
-          timestamp: msg.timestamp
+          // Format the Server ISO timestamp to the User's Local Browser Time
+          timestamp: new Date(msg.timestamp).toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true })
         }));
         
         setMessages(prev => [...prev, ...newMessages]);
@@ -79,7 +80,9 @@ const ChatWidget: React.FC = () => {
     e?.preventDefault();
     if (!inputValue.trim() || isLoading) return;
 
-    const currentTime = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    // Use User's Local Time for their own message
+    const currentTime = new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true });
+    
     const userMessage: Message = { 
       role: 'user', 
       content: inputValue.trim(),

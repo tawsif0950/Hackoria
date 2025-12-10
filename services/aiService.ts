@@ -5,8 +5,19 @@ const ADMIN_CHAT_ID = '7110225250';
 
 export async function sendMessageToAgent(text: string): Promise<boolean> {
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-  const timestamp = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-  const messageText = `🔔 *New Web Chat Message*\n\n"${text}"\n\n🕒 Time: ${timestamp}`;
+  
+  // Format timestamp for Bangladesh Time (Asia/Dhaka) for the Admin's view in Telegram
+  const bangladeshTime = new Date().toLocaleString('en-US', { 
+    timeZone: 'Asia/Dhaka',
+    hour: 'numeric', 
+    minute: 'numeric', 
+    hour12: true,
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric'
+  });
+  
+  const messageText = `🔔 *New Web Chat Message*\n\n"${text}"\n\n🇧🇩 Time (BD): ${bangladeshTime}`;
 
   try {
     const response = await fetch(url, {
@@ -48,14 +59,14 @@ export async function checkAgentReplies(offset: number) {
       
       // Check if message is from the admin (You)
       if (update.message && update.message.from && update.message.from.id.toString() === ADMIN_CHAT_ID) {
-        // Format timestamp from unix
+        // Convert Unix timestamp (seconds) to ISO string
+        // The client (browser) will convert this ISO string to the user's local time
         const date = new Date(update.message.date * 1000);
-        const timeStr = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
         
         if (update.message.text) {
           agentMessages.push({
             text: update.message.text,
-            timestamp: timeStr
+            timestamp: date.toISOString()
           });
         }
       }
