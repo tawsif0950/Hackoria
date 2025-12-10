@@ -16,9 +16,10 @@ Answer inquiries briefly and professionally. Encourage users to contact via What
 
 export const sendMessageToAI = async (history: Message[]): Promise<string> => {
   try {
-    const apiKey = process.env.API_KEY;
+    const apiKey = process.env.API_KEY?.trim();
     if (!apiKey) {
-      console.error("API_KEY is missing in environment variables.");
+      console.error("CRITICAL ERROR: API_KEY is missing in environment variables.");
+      console.error("Please go to Vercel Dashboard > Settings > Environment Variables and add API_KEY.");
       return "Security Alert: System configuration incomplete. Unable to process request.";
     }
 
