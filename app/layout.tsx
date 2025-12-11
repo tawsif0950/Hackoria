@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: 'HACKORIA | Elite Web Development & Cyber Security Agency',
     template: '%s | HACKORIA',
   },
-  description: 'HACKORIA delivers military grade Cyber Security Audits, Penetration Testing, and high-performance Custom Web Development. Protect your digital assets with Bangladesh\'s premier tech agency.',
+  description: 'HACKORIA delivers military grade Cyber Security Audits, Penetration Testing, and high-performance Custom Web Development. Protect your digital assets with Bangladesh\'s premier tech agency specializing in secure, scalable software solutions.',
   keywords: [
     'Cyber Security Company', 
     'Web Development Bangladesh', 
@@ -23,7 +23,16 @@ export const metadata: Metadata = {
     'HACKORIA', 
     'Abdur Rahman', 
     'Next.js Developers', 
-    'Cloud Security'
+    'Cloud Security',
+    'Web Application Security',
+    'Network Defense',
+    'React Developers',
+    'Frontend Engineering',
+    'Information Security Consultant',
+    'Malware Analysis',
+    'Secure Coding Practices',
+    'System Hardening',
+    'IT Consultancy Bangladesh'
   ],
   authors: [{ name: 'Abdur Rahman', url: 'https://hackoria.space' }],
   creator: 'Abdur Rahman',
@@ -83,7 +92,7 @@ export default function RootLayout({
     'url': siteUrl,
     'logo': 'https://i.postimg.cc/PqSbZ0Ls/file-0000000036207206b8f90e59168529fb.png',
     'image': 'https://i.postimg.cc/PqSbZ0Ls/file-0000000036207206b8f90e59168529fb.png',
-    'description': 'Professional Web Development and Cyber Security solutions including Penetration Testing and Secure Cloud Setup.',
+    'description': 'Professional Web Development and Cyber Security solutions including Penetration Testing, Vulnerability Assessments, and Secure Cloud Setup.',
     'founder': {
       '@type': 'Person',
       'name': 'Abdur Rahman'
