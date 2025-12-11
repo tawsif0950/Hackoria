@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ShieldCheck } from 'lucide-react';
+import { Menu, X, Fingerprint } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
               rel="noopener noreferrer"
               className="bg-brand-primary text-black hover:bg-white transition-all px-5 py-2 rounded-sm font-bold text-sm uppercase flex items-center gap-2"
             >
-              <ShieldCheck size={16} />
+              <Fingerprint size={16} />
               Secure Audit
             </a>
           </div>

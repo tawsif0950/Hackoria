@@ -1,37 +1,37 @@
 import React from 'react';
-import { Globe, ShieldAlert, Code2, Server, Lock, Search } from 'lucide-react';
+import { Laptop, ScanFace, FileSearch, BrainCircuit, Network, Eye } from 'lucide-react';
 import { ServiceItem } from '../types';
 
 const services: ServiceItem[] = [
   {
     title: "Web Development",
-    description: "High-performance, responsive websites built with React, Next.js, and modern frameworks tailored to your brand identity.",
-    icon: <Globe className="w-8 h-8 text-brand-secondary" />
+    description: "High-performance, responsive websites built with React & Next.js, tailored to connect with your audience.",
+    icon: <Laptop className="w-8 h-8 text-brand-secondary" />
   },
   {
     title: "Cyber Security Audits",
-    description: "Comprehensive vulnerability assessments to identify weak points in your infrastructure before attackers do.",
-    icon: <ShieldAlert className="w-8 h-8 text-brand-primary" />
+    description: "Comprehensive vulnerability assessments to identify weak points using human intuition and expert analysis.",
+    icon: <ScanFace className="w-8 h-8 text-brand-primary" />
   },
   {
     title: "Penetration Testing",
-    description: "Ethical hacking simulations to stress-test your defenses against real-world attack vectors.",
-    icon: <Lock className="w-8 h-8 text-brand-accent" />
+    description: "Ethical hacking simulations where our experts stress-test your defenses like a real adversary.",
+    icon: <FileSearch className="w-8 h-8 text-brand-accent" />
   },
   {
     title: "Custom Software",
-    description: "Bespoke software solutions designed to streamline your business operations and increase efficiency.",
-    icon: <Code2 className="w-8 h-8 text-brand-secondary" />
+    description: "Bespoke software solutions designed with human logic to streamline your business operations.",
+    icon: <BrainCircuit className="w-8 h-8 text-brand-secondary" />
   },
   {
     title: "Secure Cloud Setup",
-    description: "Hardened cloud infrastructure configuration for AWS, Azure, and Google Cloud to ensure data integrity.",
-    icon: <Server className="w-8 h-8 text-brand-primary" />
+    description: "Hardened cloud infrastructure configuration ensuring your team stays connected securely.",
+    icon: <Network className="w-8 h-8 text-brand-primary" />
   },
   {
     title: "Threat Analysis",
-    description: "Proactive monitoring and threat intelligence to keep your digital assets safe from emerging risks.",
-    icon: <Search className="w-8 h-8 text-brand-accent" />
+    description: "Proactive monitoring and threat intelligence. We keep a watchful eye so you don't have to.",
+    icon: <Eye className="w-8 h-8 text-brand-accent" />
   }
 ];
 
@@ -40,7 +40,7 @@ const Services: React.FC = () => {
     <section id="services" className="py-24 bg-black relative overflow-hidden">
       {/* Decorative background text */}
       <div className="absolute top-10 left-0 w-full overflow-hidden leading-none select-none pointer-events-none opacity-[0.03]">
-        <span className="text-[20vw] font-black text-white whitespace-nowrap">SERVICES</span>
+        <span className="text-[20vw] font-black text-white whitespace-nowrap">EXPERTS</span>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

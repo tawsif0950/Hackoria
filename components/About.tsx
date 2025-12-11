@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserCheck, Award, TrendingUp } from 'lucide-react';
+import { HeartHandshake, Brain, Users } from 'lucide-react';
 
 const About: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const About: React.FC = () => {
                <h3 className="text-2xl font-bold text-white mb-2">Abdur Rahman</h3>
                <p className="text-brand-primary font-mono text-sm mb-6">FOUNDER & CEO</p>
                <p className="text-gray-400 leading-relaxed mb-6">
-                 A visionary leader in the tech space, Abdur Rahman established HACKORIA with a singular mission: to bridge the gap between innovative web development and impenetrable security. 
+                 A visionary leader in the tech space, Abdur Rahman established HACKORIA with a singular mission: to bridge the gap between innovative web development and human-centric security. 
                </p>
                <p className="text-gray-400 leading-relaxed">
                  With deep expertise in ethical hacking and full-stack engineering, he ensures every project is built on a foundation of trust, speed, and resilience.
@@ -26,11 +26,11 @@ const About: React.FC = () => {
                   </div>
                   <div className="text-center border-l border-gray-800">
                     <h4 className="text-2xl font-bold text-white">100+</h4>
-                    <p className="text-xs text-gray-500 uppercase mt-1">Projects</p>
+                    <p className="text-xs text-gray-500 uppercase mt-1">Partners</p>
                   </div>
                   <div className="text-center border-l border-gray-800">
                     <h4 className="text-2xl font-bold text-white">100%</h4>
-                    <p className="text-xs text-gray-500 uppercase mt-1">Secure</p>
+                    <p className="text-xs text-gray-500 uppercase mt-1">Human</p>
                   </div>
                </div>
             </div>
@@ -38,40 +38,40 @@ const About: React.FC = () => {
 
           <div className="order-1 lg:order-2">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Defining the Standard of <span className="text-brand-secondary">Digital Excellence</span>
+              Defining the Standard of <span className="text-brand-secondary">Human Excellence</span>
             </h2>
             <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              At HACKORIA, we don't just write code; we engineer solutions. In an era where cyber threats are evolving daily, standard web development isn't enough. We integrate security protocols from the first line of code.
+              At HACKORIA, we don't just write code; we engineer relationships. In an era where cyber threats are evolving daily, we bring the human intuition back into the digital loop.
             </p>
             
             <div className="space-y-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0 bg-brand-primary/10 p-3 rounded-lg">
-                  <UserCheck className="w-6 h-6 text-brand-primary" />
+                  <HeartHandshake className="w-6 h-6 text-brand-primary" />
                 </div>
                 <div className="ml-4">
-                  <h4 className="text-xl font-semibold text-white">Client-Centric Approach</h4>
-                  <p className="text-gray-500 mt-2">Tailored strategies that align with your specific business goals and threat landscape.</p>
+                  <h4 className="text-xl font-semibold text-white">Partner-Centric Approach</h4>
+                  <p className="text-gray-500 mt-2">Tailored strategies that align with your specific business goals and human needs.</p>
                 </div>
               </div>
 
               <div className="flex items-start">
                 <div className="flex-shrink-0 bg-brand-secondary/10 p-3 rounded-lg">
-                  <TrendingUp className="w-6 h-6 text-brand-secondary" />
+                  <Users className="w-6 h-6 text-brand-secondary" />
                 </div>
                 <div className="ml-4">
-                  <h4 className="text-xl font-semibold text-white">Scalable Architecture</h4>
-                  <p className="text-gray-500 mt-2">Systems designed to grow with you, maintaining performance and security at scale.</p>
+                  <h4 className="text-xl font-semibold text-white">Community Scalability</h4>
+                  <p className="text-gray-500 mt-2">Systems designed to grow with your people, maintaining performance and security for every user.</p>
                 </div>
               </div>
 
                <div className="flex items-start">
                 <div className="flex-shrink-0 bg-brand-accent/10 p-3 rounded-lg">
-                  <Award className="w-6 h-6 text-brand-accent" />
+                  <Brain className="w-6 h-6 text-brand-accent" />
                 </div>
                 <div className="ml-4">
-                  <h4 className="text-xl font-semibold text-white">Certified Expertise</h4>
-                  <p className="text-gray-500 mt-2">Our team holds industry-recognized certifications in development and security.</p>
+                  <h4 className="text-xl font-semibold text-white">Intelligent Expertise</h4>
+                  <p className="text-gray-500 mt-2">Our team brings creative problem solving that AI simply cannot match.</p>
                 </div>
               </div>
             </div>
