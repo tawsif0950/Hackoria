@@ -211,7 +211,7 @@ const ChatWidget: React.FC = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${
-            isOpen ? 'bg-gray-800 text-white' : 'bg-brand-primary text-black neon-glow animate-bounce-slow'
+            isOpen ? 'bg-gray-800 text-white' : 'bg-brand-primary text-black neon-glow animate-pulse-scale'
         }`}
       >
         {isOpen ? <X size={24} /> : <MessageCircle size={28} fill="currentColor" />}

@@ -138,6 +138,15 @@ export default function RootLayout({
                       secondary: '#00b8ff',
                       accent: '#7000ff',
                     }
+                  },
+                  keyframes: {
+                    'pulse-scale': {
+                      '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(0, 255, 157, 0.7)' },
+                      '50%': { transform: 'scale(1.1)', boxShadow: '0 0 20px 0px rgba(0, 255, 157, 0)' },
+                    }
+                  },
+                  animation: {
+                    'pulse-scale': 'pulse-scale 2s ease-in-out infinite',
                   }
                 }
               }
