@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: 'HACKORIA | Elite Web Development & Cyber Security Agency',
     template: '%s | HACKORIA',
   },
-  description: 'HACKORIA delivers military-grade Cyber Security Audits, Penetration Testing, and high-performance Custom Web Development. Protect your digital assets with Bangladesh\'s premier tech agency.',
+  description: 'HACKORIA delivers military grade Cyber Security Audits, Penetration Testing, and high-performance Custom Web Development. Protect your digital assets with Bangladesh\'s premier tech agency.',
   keywords: [
     'Cyber Security Company', 
     'Web Development Bangladesh', 
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'HACKORIA | Elite Cyber Security & Web Dev',
-    description: 'Military-grade security and cutting-edge web development. Founded by Abdur Rahman.',
+    description: 'Military grade security and cutting-edge web development. Founded by Abdur Rahman.',
     images: ['https://i.postimg.cc/PqSbZ0Ls/file-0000000036207206b8f90e59168529fb.png'],
   },
   alternates: {

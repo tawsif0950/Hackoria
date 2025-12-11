@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
         
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-primary/30 bg-brand-primary/10 text-brand-primary mb-8 animate-pulse">
           <span className="w-2 h-2 rounded-full bg-brand-primary"></span>
-          <span className="text-xs font-mono uppercase tracking-widest">Human Intelligence Secured</span>
+          <span className="text-xs font-mono uppercase tracking-widest">SYSTEM SECURED</span>
         </div>
 
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6">
@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
         </h1>
 
         <p className="mt-4 text-xl text-gray-400 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
-          <span className="font-bold text-white">HACKORIA</span> combines human creativity with military-grade security. 
+          <span className="font-bold text-white">HACKORIA</span> combines human creativity with military grade security. 
           We protect your people and your future.
         </p>
 

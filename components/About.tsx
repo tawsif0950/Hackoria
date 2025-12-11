@@ -19,18 +19,10 @@ const About: React.FC = () => {
                  With deep expertise in ethical hacking and full-stack engineering, he ensures every project is built on a foundation of trust, speed, and resilience.
                </p>
 
-               <div className="mt-8 grid grid-cols-3 gap-4 border-t border-gray-800 pt-6">
-                  <div className="text-center">
+               <div className="mt-8 border-t border-gray-800 pt-6">
+                  <div className="inline-block text-center px-4">
                     <h4 className="text-2xl font-bold text-white">5+</h4>
                     <p className="text-xs text-gray-500 uppercase mt-1">Years Exp</p>
-                  </div>
-                  <div className="text-center border-l border-gray-800">
-                    <h4 className="text-2xl font-bold text-white">100+</h4>
-                    <p className="text-xs text-gray-500 uppercase mt-1">Partners</p>
-                  </div>
-                  <div className="text-center border-l border-gray-800">
-                    <h4 className="text-2xl font-bold text-white">100%</h4>
-                    <p className="text-xs text-gray-500 uppercase mt-1">Human</p>
                   </div>
                </div>
             </div>
