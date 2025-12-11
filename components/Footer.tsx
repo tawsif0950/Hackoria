@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
           <div className="mb-6 md:mb-0 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
              <img 
                 src="https://i.postimg.cc/PqSbZ0Ls/file-0000000036207206b8f90e59168529fb.png" 
-                alt="HACKORIA Logo" 
+                alt="HACKORIA - Secure Your Future" 
                 className="h-32 w-auto" 
               />
             <div>

@@ -29,10 +29,10 @@ const Navbar: React.FC = () => {
           
           {/* Logo Section */}
           <div className="flex-shrink-0 flex items-center">
-            <a href="#" className="flex items-center gap-2">
+            <a href="#" className="flex items-center gap-2" aria-label="HACKORIA Home">
               <img 
                 src="https://i.postimg.cc/PqSbZ0Ls/file-0000000036207206b8f90e59168529fb.png" 
-                alt="HACKORIA Logo" 
+                alt="HACKORIA - Web Development and Cyber Security Agency Logo" 
                 className="h-28 w-auto" 
               />
             </a>
@@ -65,6 +65,7 @@ const Navbar: React.FC = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-300 hover:text-white focus:outline-none"
+              aria-label="Toggle Menu"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
