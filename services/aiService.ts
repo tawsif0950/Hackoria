@@ -3,7 +3,7 @@
 const BOT_TOKEN = '8162964724:AAGFqoLbr-g43IynIwQe6ll5CsCoYchMGlY';
 const ADMIN_CHAT_ID = '7110225250';
 
-export async function sendMessageToAgent(text: string): Promise<boolean> {
+export async function sendMessageToAgent(text: string, userId: string): Promise<boolean> {
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
   
   // Format timestamp for Bangladesh Time (Asia/Dhaka) for the Admin's view in Telegram
@@ -17,7 +17,8 @@ export async function sendMessageToAgent(text: string): Promise<boolean> {
     day: 'numeric'
   });
   
-  const messageText = `🔔 *New Web Chat Message*\n\n"${text}"\n\n🇧🇩 Time (BD): ${bangladeshTime}`;
+  // Include User ID in the message so replies can be tracked accurately
+  const messageText = `🔔 *New Web Chat Message*\n🆔 User ID: \`${userId}\`\n\n"${text}"\n\n🇧🇩 Time (BD): ${bangladeshTime}`;
 
   try {
     const response = await fetch(url, {
@@ -36,7 +37,7 @@ export async function sendMessageToAgent(text: string): Promise<boolean> {
   }
 }
 
-export async function checkAgentReplies(offset: number) {
+export async function checkAgentReplies(offset: number, userId: string) {
   // getUpdates with offset to only get new messages. 
   // Cache: 'no-store' is crucial for Next.js to actually fetch fresh data.
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${offset}&timeout=0`;
@@ -54,13 +55,21 @@ export async function checkAgentReplies(offset: number) {
     let maxUpdateId = offset - 1;
 
     for (const update of updates) {
-      // Track the highest update_id to confirm receipt
+      // Track the highest update_id to confirm receipt globally
       maxUpdateId = Math.max(maxUpdateId, update.update_id);
       
-      // Check if message is from the admin (You)
-      if (update.message && update.message.from && update.message.from.id.toString() === ADMIN_CHAT_ID) {
+      // 1. Check if message is from the admin
+      // 2. Check if it is a REPLY to a previous message
+      // 3. Check if the original message (the one replied to) contains the current userId
+      if (
+        update.message && 
+        update.message.from && 
+        update.message.from.id.toString() === ADMIN_CHAT_ID &&
+        update.message.reply_to_message &&
+        update.message.reply_to_message.text &&
+        update.message.reply_to_message.text.includes(userId)
+      ) {
         // Convert Unix timestamp (seconds) to ISO string
-        // The client (browser) will convert this ISO string to the user's local time
         const date = new Date(update.message.date * 1000);
         
         if (update.message.text) {
@@ -72,7 +81,7 @@ export async function checkAgentReplies(offset: number) {
       }
     }
 
-    // Return messages and the next offset (max + 1) to mark these as read in Telegram
+    // Return messages for THIS user, but advance offset for ALL updates so we don't re-fetch irrelevant ones
     return { messages: agentMessages, nextOffset: maxUpdateId + 1 };
     
   } catch (error) {

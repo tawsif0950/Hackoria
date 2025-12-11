@@ -11,14 +11,30 @@ const ChatWidget: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [lastOffset, setLastOffset] = useState(0);
+  const [userId, setUserId] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const pollingInterval = useRef<any>(null);
 
-  // Load chat history from local storage on mount
+  // Helper to generate a unique ID for the session
+  const generateId = () => {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  };
+
+  // Load chat history and User ID from local storage on mount
   useEffect(() => {
     const savedMessages = localStorage.getItem('hackoria_chat_messages');
     const savedOffset = localStorage.getItem('hackoria_chat_offset');
+    let savedUserId = localStorage.getItem('hackoria_user_id');
     
+    if (!savedUserId) {
+      savedUserId = generateId();
+      localStorage.setItem('hackoria_user_id', savedUserId);
+    }
+    setUserId(savedUserId);
+
     if (savedMessages) {
       setMessages(JSON.parse(savedMessages));
     } else {
@@ -51,9 +67,12 @@ const ChatWidget: React.FC = () => {
   useEffect(() => {
     if (pollingInterval.current) clearInterval(pollingInterval.current);
 
+    // Only start polling if we have a UserId
+    if (!userId) return;
+
     pollingInterval.current = setInterval(async () => {
-      // Only poll if the chat has been opened at least once or we have started chatting
-      const result = await checkAgentReplies(lastOffset);
+      // Poll with the specific UserId
+      const result = await checkAgentReplies(lastOffset, userId);
       
       if (result.messages.length > 0) {
         const newMessages: Message[] = result.messages.map(msg => ({
@@ -66,6 +85,7 @@ const ChatWidget: React.FC = () => {
         setMessages(prev => [...prev, ...newMessages]);
       }
       
+      // Always update offset to avoid stuck loops, even if message wasn't for this user
       if (result.nextOffset > lastOffset) {
         setLastOffset(result.nextOffset);
       }
@@ -74,11 +94,11 @@ const ChatWidget: React.FC = () => {
     return () => {
       if (pollingInterval.current) clearInterval(pollingInterval.current);
     };
-  }, [lastOffset]);
+  }, [lastOffset, userId]);
 
   const handleSendMessage = async (e?: React.FormEvent) => {
     e?.preventDefault();
-    if (!inputValue.trim() || isLoading) return;
+    if (!inputValue.trim() || isLoading || !userId) return;
 
     // Use User's Local Time for their own message
     const currentTime = new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true });
@@ -94,9 +114,9 @@ const ChatWidget: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const success = await sendMessageToAgent(userMessage.content);
+      // Send message with the unique UserId
+      const success = await sendMessageToAgent(userMessage.content, userId);
       if (!success) {
-        // Optional: show error state if needed
         console.error("Failed to send to Telegram");
       }
     } catch (error) {
