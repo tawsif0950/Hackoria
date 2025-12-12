@@ -58,7 +58,9 @@ const Services: React.FC = () => {
               className="group p-8 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-brand-primary/50 hover:bg-gray-900 transition-all duration-300 hover:-translate-y-1"
             >
               <div className="mb-6 p-4 bg-black rounded-lg inline-block border border-gray-800 group-hover:border-brand-primary/30 transition-colors">
-                {service.icon}
+                <div className="transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-rotate-6">
+                  {service.icon}
+                </div>
               </div>
               <h4 className="text-xl font-bold text-white mb-3 group-hover:text-brand-primary transition-colors">{service.title}</h4>
               <p className="text-gray-400 leading-relaxed text-sm">
